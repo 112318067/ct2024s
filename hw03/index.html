@@ -231,10 +231,14 @@
 
   <!-- ------------------------------------------------>
   <div class="row hw12">
-    <div class="col-md-12 twenty">
-      <video id="video1" style="width:100%;max-width:100%;" controls="">
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      </video>
+    <div class="col-md-12 twenty">    
+      <img src="./simple/專案下載.jpg" width="1200px" height="600px"/>
+    </div>
+  </div>
+  
+  <div class="row hw12">
+    <div class="col-md-12 twenty">    
+      <img src="./simple/環境.jpg" width="1200px" height="600px"/>
     </div>
   </div>
 
@@ -276,9 +280,18 @@
     if (d3.select("#myCheckbox3").property("checked")){
       score += parseInt(d3.select('#m3').html());   
     }
+    
+    if (d3.select("#myCheckbox4").property("checked")){
+      score += parseInt(d3.select('#m4').html());   
+    }
+
+   if (d3.select("#myCheckbox5").property("checked")){
+      score += parseInt(d3.select('#m5').html());   
+    }
 
     d3.select("#myTotal").html(score);    
   }
+
 </script>
 
 </body>

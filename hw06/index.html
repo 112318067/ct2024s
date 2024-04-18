@@ -228,19 +228,19 @@
   <div class="row hw12">
     <div class="col-md-12 twenty">    
         <img src="./112318067.jpg" width="300px" height="300px"/>
-        <canvas id="scatterPlot" width="500" height="500"></canvas>
+        <canvas id="scatterPlot" width="500" height="500" style="background-color: white;"></canvas>
     </div>
 
     <script>
         // 數據
         const data = [
-            { x: 0.876558373*500, y: 0.228624418*500, imgSrc: './112318080.jpg' },
-            { x: 0.852030700*500, y: 0.325301796*500, imgSrc: './111C52018.jpg' },
-            { x: 0.882777972*500, y: 0.3429735*500, imgSrc: './112598053.jpg' },
-            { x: 0.826543862*500, y: 0.375195146*500, imgSrc: './110598039.jpg' },
-            { x: 0.835194191*500, y: 0.394757837*500, imgSrc: './112598084.jpg' },
-            { x: 0.822791195*500, y: 0.42870304*500, imgSrc: './111598079.jpg' },
-            { x: 0.832537297*500, y: 0.435781807*500, imgSrc: './112598016.jpg' }
+            { x: 0.876558373*500, y: 0.228624418*500, imgSrc: '112318080.jpg' },
+            { x: 0.852030700*500, y: 0.325301796*500, imgSrc: '111C52018.jpg' },
+            { x: 0.882777972*500, y: 0.3429735*500, imgSrc: '112598053.jpg' },
+            { x: 0.826543862*500, y: 0.375195146*500, imgSrc: '110598039.jpg' },
+            { x: 0.835194191*500, y: 0.394757837*500, imgSrc: '112598084.jpg' },
+            { x: 0.822791195*500, y: 0.42870304*500, imgSrc: '111598079.jpg' },
+            { x: 0.832537297*500, y: 0.435781807*500, imgSrc: '112598016.jpg' }
         ];
 
         // 獲取canvas元素和繪圖上下文
@@ -270,14 +270,20 @@
                 ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);
                 ctx.fillStyle = 'blue';
                 ctx.fill();
+            });
 
-                // 檢查鼠標位置是否在散點上
-                canvas.addEventListener('mousemove', function(event) {
-                    const rect = canvas.getBoundingClientRect();
-                    const mouseX = event.clientX - rect.left;
-                    const mouseY = event.clientY - rect.top;
+            // 檢查鼠標位置是否在散點上
+            canvas.addEventListener('mousemove', function(event) {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = event.clientX - rect.left;
+                const mouseY = event.clientY - rect.top;
 
+                let hovered = false;
+
+                data.forEach(point => {
                     if (Math.abs(mouseX - point.x) < 5 && Math.abs(mouseY - point.y) < 5) {
+                        hovered = true;
+
                         // 鼠標在散點上時，顯示圖片
                         const img = new Image();
                         img.src = point.imgSrc;
@@ -286,6 +292,12 @@
                         };
                     }
                 });
+
+                if (!hovered) {
+                    // 如果鼠標沒有懸停在任何散點上，清除圖片
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    drawScatterPlot();  // 重新繪製散點圖和刻度
+                }
             });
         }
 
@@ -293,6 +305,7 @@
         drawScatterPlot();
     </script>
 </div>
+
 
   <!-- ------------------------------------------------>
 
